@@ -37,7 +37,7 @@ const Login = () => {
     if (localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)) {
       navigate("/");
     }
-  }, []);
+  }, [navigate]);
 
   //handle change
   const handleChange = (event) => {
@@ -50,6 +50,8 @@ const Login = () => {
       username,
       password,
     });
+    console.log(data);
+
     if (data.status) {
       localStorage.setItem(
         process.env.REACT_APP_LOCALHOST_KEY,

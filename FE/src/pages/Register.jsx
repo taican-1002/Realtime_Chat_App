@@ -48,7 +48,7 @@ const Register = () => {
     if (localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)) {
       navigate("/");
     }
-  }, []);
+  }, [navigate]);
 
   //handle change
   const handleChange = (event) => {

@@ -75,8 +75,20 @@ const SetAvatar = () => {
       const user = await JSON.parse(
         localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)
       );
-      console.log(user);
-      navigate("/");
+      const { data } = await axios.post(`${setAvatarRoute}/${user._id}`, {
+        image: avatars[selectedAvatar],
+      });
+      if (data.isSet) {
+        user.isAvatarImageSet = true;
+        user.avatarImage = data.image;
+        localStorage.setItem(
+          process.env.REACT_APP_LOCALHOST_KEY,
+          JSON.stringify(user)
+        );
+        navigate("/");
+      } else {
+        toast.error("Error setting avatar. Please try again");
+      }
     }
   };
   useEffect(() => {
@@ -96,7 +108,13 @@ const SetAvatar = () => {
     };
 
     getAvatarProfile();
-  }, []);
+  }, [api]);
+
+  useEffect(() => {
+    if (!localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)) {
+      navigate("/login");
+    }
+  }, [navigate]);
   return (
     <>
       {isLoading ? (
