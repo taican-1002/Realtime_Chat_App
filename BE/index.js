@@ -14,6 +14,9 @@ app.use(express.json());
 app.use("/api/auth", userRoutes);
 app.use("/api/messages", messageRoutes);
 
+app.get("*", (request, response) => {
+  response.sendFile(path.join(__dirname, "FE/build", "index.html"));
+});
 mongoose
   .connect(process.env.MONGO_URL, {
     useNewUrlParser: true,

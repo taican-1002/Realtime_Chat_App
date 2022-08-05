@@ -54,7 +54,7 @@ const Container = styled.div`
         }
       }
       .username {
-        h3 {
+        h2 {
           color: white;
         }
       }
