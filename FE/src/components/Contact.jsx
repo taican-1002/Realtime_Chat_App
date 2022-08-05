@@ -1,5 +1,8 @@
+//react
 import React, { useState, useEffect } from "react";
+//styled
 import styled from "styled-components";
+//img
 import logo from "../assets/logo.svg";
 
 const Container = styled.div`
@@ -92,6 +95,8 @@ const Contact = ({ contacts, changeChat }) => {
   const [currentUserName, setCurrentUserName] = useState(undefined);
   const [currentUserImage, setCurrentUserImage] = useState(undefined);
   const [currentSelected, setCurrentSelected] = useState(undefined);
+
+  //set currentUser
   useEffect(() => {
     const handleSetCurrentUser = async () => {
       const data = await JSON.parse(
@@ -103,6 +108,7 @@ const Contact = ({ contacts, changeChat }) => {
     handleSetCurrentUser();
   }, []);
 
+  //choose user to start chat message
   const changeCurrentUserChat = (index, contact) => {
     setCurrentSelected(index);
     changeChat(contact);

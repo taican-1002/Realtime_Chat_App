@@ -1,8 +1,13 @@
+//react
 import React, { useEffect, useState, useRef } from "react";
+//styled
 import styled from "styled-components";
+//component
 import ChatInput from "./ChatInput";
 import Logout from "./Logout";
+//utils
 import { sendMessageRoute, getAllMessagesRoute } from "../utils/apiRoutes";
+//axios
 import axios from "axios";
 
 const Container = styled.div`
@@ -83,6 +88,7 @@ const ChatContainer = ({ currentChat, currentUser, socketRef }) => {
   const [arrivalMessage, setArrivalMessage] = useState(null);
   const scrollRef = useRef();
 
+  //set Messages
   useEffect(() => {
     const handleSetMsg = async () => {
       const data = await JSON.parse(
@@ -97,6 +103,7 @@ const ChatContainer = ({ currentChat, currentUser, socketRef }) => {
     handleSetMsg();
   }, [currentChat, currentUser]);
 
+  //send Messages
   const handleSendMsg = async (msg) => {
     const data = await JSON.parse(
       localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)
@@ -118,7 +125,7 @@ const ChatContainer = ({ currentChat, currentUser, socketRef }) => {
     msgs.push({ fromSelf: true, message: msg });
     setMessages(msgs);
   };
-
+  //set arrival messages
   useEffect(() => {
     if (socketRef.current) {
       socketRef.current.on("msg-receive", (msg) => {
@@ -127,10 +134,11 @@ const ChatContainer = ({ currentChat, currentUser, socketRef }) => {
     }
   }, [socketRef]);
 
+  // render and set message
   useEffect(() => {
     arrivalMessage && setMessages((prev) => [...prev, arrivalMessage]);
   }, [arrivalMessage]);
-
+  //scroll every time have a new message
   useEffect(() => {
     scrollRef.current?.scrollIntoView({ behavior: "smooth" });
   });

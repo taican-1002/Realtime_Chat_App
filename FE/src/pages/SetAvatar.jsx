@@ -1,10 +1,18 @@
+//react
 import React, { useState, useEffect } from "react";
+//react router dom
 import { useNavigate } from "react-router-dom";
+//img
 import loader from "../assets/loader.gif";
+//styled
 import styled from "styled-components";
+//buffer
 import { Buffer } from "buffer";
+//toast
 import { toast } from "react-toastify";
+//axios
 import axios from "axios";
+//utils
 import { setAvatarRoute } from "../utils/apiRoutes";
 
 const Container = styled.div`
@@ -68,6 +76,7 @@ const SetAvatar = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [selectedAvatar, setSelectedAvatar] = useState(undefined);
 
+  //check set avatar
   const setProfilePicture = async () => {
     if (selectedAvatar === undefined) {
       toast.error("Please select an avatar");
@@ -91,6 +100,7 @@ const SetAvatar = () => {
       }
     }
   };
+  //set avatar
   useEffect(() => {
     const data = [];
     const getAvatarProfile = async () => {
@@ -109,7 +119,7 @@ const SetAvatar = () => {
 
     getAvatarProfile();
   }, [api]);
-
+  //check login
   useEffect(() => {
     if (!localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)) {
       navigate("/login");

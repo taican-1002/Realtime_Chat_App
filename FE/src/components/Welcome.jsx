@@ -1,5 +1,8 @@
+//react
 import React, { useState, useEffect } from "react";
+//styled
 import styled from "styled-components";
+//img
 import robot from "../assets/robot.gif";
 
 const Container = styled.div`
@@ -19,6 +22,7 @@ const Container = styled.div`
 const Welcome = () => {
   const [username, setUsername] = useState(undefined);
 
+  //set Username
   useEffect(() => {
     const handleSetUsername = async () => {
       const data = await JSON.parse(

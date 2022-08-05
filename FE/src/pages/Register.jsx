@@ -1,9 +1,16 @@
+//react
 import React, { useState, useEffect } from "react";
+//react router dom
 import { Link, useNavigate } from "react-router-dom";
+//img
 import Logo from "../assets/logo.svg";
+//toast
 import { toast } from "react-toastify";
+//axios
 import axios from "axios";
+//utils
 import { registerRoute } from "../utils/apiRoutes";
+//component
 import FormContainer from "../components/FormContainer";
 //react-hook-form
 import { useForm } from "react-hook-form";
@@ -17,6 +24,7 @@ import {
   samePasswordValidator,
 } from "../utils/messageValidator";
 
+//register schema
 const RegisterSchema = yup.object().shape({
   username: yup.string().required().min(3),
   email: yup.string().required().min(0),
@@ -43,7 +51,7 @@ const Register = () => {
     confirmPassword: "",
   });
   const navigate = useNavigate();
-
+  //check login
   useEffect(() => {
     if (localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)) {
       navigate("/");
@@ -64,10 +72,6 @@ const Register = () => {
     });
     if (data.status) {
       toast.success("Create User Success");
-      // localStorage.setItem(
-      //   process.env.REACT_APP_LOCALHOST_KEY,
-      //   JSON.stringify(data.user)
-      // );
       navigate("/login");
     } else {
       toast.error(data.msg);

@@ -1,9 +1,16 @@
+//react
 import React from "react";
+//styled
 import styled from "styled-components";
+//react icons
 import { BiPowerOff } from "react-icons/bi";
+//axios
 import axios from "axios";
+//utils
 import { logoutRoute } from "../utils/apiRoutes";
+//react router dom
 import { useNavigate } from "react-router-dom";
+//toast
 import { toast } from "react-toastify";
 
 const Button = styled.button`
@@ -24,7 +31,8 @@ const Button = styled.button`
 const Logout = () => {
   const navigate = useNavigate();
 
-  const handleClick = async () => {
+  // logout
+  const handleLogout = async () => {
     const id = await JSON.parse(
       localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)
     )._id;
@@ -36,7 +44,7 @@ const Logout = () => {
     }
   };
   return (
-    <Button onClick={handleClick}>
+    <Button onClick={handleLogout}>
       <BiPowerOff />
     </Button>
   );

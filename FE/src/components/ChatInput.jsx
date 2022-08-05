@@ -1,7 +1,11 @@
+//react
 import React, { useState } from "react";
+//react icon
 import { BsEmojiSmileFill } from "react-icons/bs";
 import { IoMdSend } from "react-icons/io";
+//styled
 import styled from "styled-components";
+//emoji picker
 import Picker from "emoji-picker-react";
 
 const Container = styled.div`
@@ -104,16 +108,18 @@ const ChatInput = ({ handleSendMsg }) => {
   const [msg, setMsg] = useState("");
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
 
+  //set ShowEmojiPicker
   const handleEmojiPickerHideShow = () => {
     setShowEmojiPicker(!showEmojiPicker);
   };
 
+  //click choose Emoji
   const handleEmojiClick = (event, emoji) => {
     let message = msg;
     message += emoji.emoji;
     setMsg(message);
   };
-
+  // send chat
   const sendChat = (event) => {
     event.preventDefault();
     if (msg.length > 0) {

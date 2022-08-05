@@ -1,18 +1,24 @@
+//react
 import React, { useState, useEffect } from "react";
+//react router dom
 import { Link, useNavigate } from "react-router-dom";
+//img
 import Logo from "../assets/logo.svg";
+//toast
 import { toast } from "react-toastify";
+//axios
 import axios from "axios";
+//utils
 import { loginRoute } from "../utils/apiRoutes";
+import { loginValidator, usernameValidator } from "../utils/messageValidator";
+//component
 import FormContainer from "../components/FormContainer";
-
 //react-hook-form
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
-import { loginValidator, usernameValidator } from "../utils/messageValidator";
-
+// login schema
 const LoginSchema = yup.object().shape({
   username: yup.string().required().min(3),
   password: yup.string().required(),
@@ -33,6 +39,7 @@ const Login = () => {
   });
   const navigate = useNavigate();
 
+  //check login
   useEffect(() => {
     if (localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)) {
       navigate("/");
