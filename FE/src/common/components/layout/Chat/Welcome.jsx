@@ -1,0 +1,50 @@
+//react
+import React, { useState, useEffect } from "react";
+//styled
+import styled from "styled-components";
+//img
+import robot from "@/assets/img/robot.gif";
+
+const Container = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  flex-direction: column;
+  background-color: #fff;
+  height: 85vh;
+  border-radius: 15px;
+  img {
+    height: 20rem;
+  }
+  span {
+    color: #4e0eff;
+  }
+`;
+
+const Welcome = () => {
+  const [username, setUsername] = useState(undefined);
+
+  //set Username
+  useEffect(() => {
+    const handleSetUsername = async () => {
+      const data = await JSON.parse(
+        localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)
+      );
+      setUsername(data.username);
+    };
+    handleSetUsername();
+  }, []);
+
+  return (
+    <Container>
+      <img src={robot} alt="robot" />
+      <h1>
+        Welcome, <span>{username}</span>
+      </h1>
+      <h3>Please select a chat to Start Messaging.</h3>
+    </Container>
+  );
+};
+
+export default Welcome;
